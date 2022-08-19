@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Category List')
+@section('title', 'Product List')
 @section('content')
     <!-- MAIN CONTENT-->
     <div class="main-content">
@@ -10,14 +10,14 @@
                     <div class="table-data__tool">
                         <div class="table-data__tool-left">
                             <div class="overview-wrap">
-                                <h2 class="title-1">Category List</h2>
+                                <h2 class="title-1">Products List</h2>
 
                             </div>
                         </div>
                         <div class="table-data__tool-right">
-                            <a href="{{ route('catergory#createPage') }}">
+                            <a href="{{ route('product#createPage') }}">
                                 <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                    <i class="zmdi zmdi-plus"></i>Add Category
+                                    <i class="zmdi zmdi-plus"></i>Add Pizza
                                 </button>
                             </a>
                             <button class="au-btn au-btn-icon au-btn--green au-btn--small">
@@ -42,7 +42,7 @@
                                 </h5>
                         </div>
                         <div class="col-3 offset-6">
-                            <form action="{{ route('Catergory#list') }}" method="GET">
+                            <form action="{{ route('product#list') }}" method="GET">
                                 @csrf
                                 <div class="d-flex">
                                     <input type="text" name="key" class="form-control" placeholder="Search.."
@@ -54,53 +54,58 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-1 offset-10 bg-white shadow-sm p-2 text-center">
-                                <h4><i class="zmdi zmdi-info"></i> - {{ $categories->total() }}</h4>
+                                <h4><i class="zmdi zmdi-info"></i> {{ $pizza->total() }}</h4>
                             </div>
                         </div>
                     </div>
-                    @if (count($categories) != 0)
+                    @if (count($pizza) != 0)
                         <div class="table-responsive table-responsive-data2">
-                            <table class="table table-data2">
+                            <table class="table table-data2 text-center">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Category Name</th>
-                                        <th>Category Date</th>
-
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Category</th>
+                                        <th>View Count</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $category)
+                                    @foreach ($pizza as $p)
                                         <tr class="tr-shadow my-2">
-                                            <td>{{ $category->id }} </td>
-                                            <td>{{ $category->name }} </td>
-                                            <td>{{ $category->created_at->format('j-F-Y') }} </td>
-                                            <td>
-                                                CRUD
-                                            </td>
+                                            <td class="col-3"><img src="{{ asset('storage/' . $p->image) }}" alt=""
+                                                    class="img-thumbnail shadow-sm"> </td>
+                                            <td>{{ $p->name }} </td>
+                                            <td>{{ $p->price }} </td>
+                                            <td>{{ $p->category_id }} </td>
+                                            <td><i class="zmdi zmdi-eye"></i> {{ $p->view_count }}</td>
+
                                             <td>
                                                 <div class="table-data-feature">
                                                     {{-- <button class="item" data-toggle="tooltip" data-placement="top"
                                                         title="Send">
                                                         <i class="zmdi zmdi-mail-send"></i>
                                                     </button> --}}
-                                                    <a href="{{ route('category#edit',$category->id) }}" class="me-3">
+                                                    <a href="{{ route('product#edit', $p->id) }}" class="me-3">
                                                         <button class="item" data-toggle="tooltip" data-placement="top"
                                                             title="Edit">
+                                                            <i class="zmdi zmdi-eye"></i>
+                                                        </button>
+                                                    </a>
+                                                    <a href="{{ route('product#updatePage', $p->id) }}" class="me-3">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="Update">
                                                             <i class="zmdi zmdi-edit"></i>
                                                         </button>
                                                     </a>
-                                                    <a href="{{ route('category#delete', $category->id) }}"  class="me-3">
+                                                    <a href="{{ route('product#delete', $p->id) }}" class="me-3">
                                                         <button class="item" data-toggle="tooltip" data-placement="top"
                                                             title="Delete">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </button>
                                                     </a>
 
-                                                    <button class="item" data-toggle="tooltip" data-placement="top"
-                                                        title="More">
-                                                        <i class="zmdi zmdi-more"></i>
-                                                    </button>
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -108,13 +113,12 @@
                                 </tbody>
                             </table>
                             <div class="mt-3">
-                                {{ $categories->links() }}
-                                {{-- {{  $categories->appends(request()->query())->links() }} --}}
+                                {{ $pizza->appends(request()->query())->links() }}
 
                             </div>
                         </div>
-                    @else
-                        <h3 class="text-center mt-5 text-secondary">There is no Category Here!</h3>
+                        @else
+                        <h3 class="text-center mt-5 text-secondary">There is no Pizza Here!</h3>
                     @endif
                     <!-- END DATA TABLE -->
                 </div>

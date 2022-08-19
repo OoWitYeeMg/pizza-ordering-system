@@ -11,7 +11,10 @@
 
     <!-- Title Page-->
     <title>@yield('title')</title>
-
+    {{-- Bootstrap Link --}}
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <!-- Fontfaces CSS-->
     <link href="{{ asset('admin/css/font-face.css') }}" rel="stylesheet" media="all">
     <link href="{{ asset('admin/vendor/font-awesome-4.7/css/font-awesome.min.css') }}" rel="stylesheet" media="all">
@@ -49,18 +52,17 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub">
-                            <a class="js-arrow" href="index.html">
-                                <i class="fas fa-tachometer-alt"></i>Home Page
-                            </a>
-                        </li>
+
                         <li>
-                            <a href="category.html">
+                            <a href="{{ route('Catergory#list') }}">
                                 <i class="fas fa-chart-bar"></i>Category</a>
                         </li>
                         <li>
-                            <a href="customerList.html">
-                                <i class="fas fa-chart-bar"></i>Customers</a>
+                            <a href="{{ route('product#list') }}">
+                                <i class="zmdi zmdi-pizza"></i>Products</a>
+                        </li> <li>
+                            <a href="{{ route('Catergory#list') }}">
+                                <i class="fas fa-chart-bar"></i>Category</a>
                         </li>
                     </ul>
                 </nav>
@@ -76,11 +78,12 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search"
+                                <h4>Admin Dashboard Panel</h4>
+                                {{-- <input class="au-input au-input--xl" type="text" name="search"
                                     placeholder="Search for datas &amp; reports..." />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
-                                </button>
+                                </button> --}}
                             </form>
                             <div class="header-button">
                                 <div class="noti-wrap">
@@ -126,9 +129,13 @@
                                 </div>
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
-                                        <div class="image">
-                                            <img src="{{ asset('admin/images/icon/avatar-01.jpg') }}"
-                                                alt="John Doe" />
+                                        <div class="image ">
+                                            @if (Auth::user()->image == null)
+                                                <img src="{{ asset('image/download.jfif') }}" class="rounded">
+                                            @else
+                                                <img src="{{ asset('storage/'.Auth::user()->image) }}"
+                                                    alt="John Doe">
+                                            @endif
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">{{ Auth::user()->name }}</a>
@@ -136,9 +143,13 @@
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
-                                                    <a href="#">
-                                                        <img src="{{ asset('admin/images/icon/avatar-01.jpg') }}"
-                                                            alt="John Doe" />
+                                                    <a href="">
+                                                        @if (Auth::user()->image == null)
+                                                            <img src="{{ asset('image/download.jfif') }}">
+                                                        @else
+                                                            <img src="{{ asset('storage/'.Auth::user()->image) }}"
+                                                                alt="John Doe">
+                                                        @endif
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -150,15 +161,23 @@
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="#">
+                                                    <a href="{{ route('admin#details') }}">
                                                         <i class="zmdi zmdi-account"></i>Account</a>
                                                 </div>
                                             </div>
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="{{ route('admin#changePasswordPage') }}">
+                                                        <i class="zmdi zmdi-key"></i>Change Password</a>
+                                                </div>
+                                            </div>
                                             <div class="account-dropdown__footer mb-3">
-                                                <form action="{{ route('logout') }}" class="d-flex justify-content-center" method="POST">
+                                                <form action="{{ route('logout') }}"
+                                                    class="d-flex justify-content-center" method="POST">
                                                     @csrf
-                                                    <button class="btn bg-dark text-white text-center col-10" type="submit">
-                                                        <i class="zmdi zmdi-power"></i>Logout
+                                                    <button class="btn bg-dark text-white text-center col-10"
+                                                        type="submit">
+                                                        <i class="zmdi zmdi-power "> </i> Logout
                                                     </button>
                                                 </form>
                                             </div>
@@ -179,7 +198,11 @@
         </div>
 
     </div>
-
+    {{-- Bootstrap Js --}}
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
+    </script>
     <!-- Jquery JS-->
     <script src="{{ asset('admin/vendor/jquery-3.2.1.min.js') }}"></script>
     <!-- Bootstrap JS-->

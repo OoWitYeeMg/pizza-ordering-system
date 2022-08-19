@@ -3,6 +3,9 @@
 @section('contents')
 
 <div class="login-form">
+    @error('terms')
+    <div class="invalid-feedback">{{ $message }}</div>
+@enderror
     <form action="{{ route('auth#LoginPage') }}" method="post">
         @csrf
         <div class="form-group">
