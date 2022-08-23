@@ -14,7 +14,7 @@
                                     <i class="zmdi zmdi-arrow-left text-dark ms-3" onclick="history.back()"></i>
                             </div>
                             <div class="card-title">
-                                <h3 class="text-center title-2">Pizza Details</h3>
+                                <h3 class="text-center title-2">Pizza Update  </h3>
                             </div>
                             <hr>
                             <form action="{{ route('product#update') }}" method="post"

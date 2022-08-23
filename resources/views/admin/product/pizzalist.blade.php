@@ -77,7 +77,7 @@
                                                     class="img-thumbnail shadow-sm"> </td>
                                             <td>{{ $p->name }} </td>
                                             <td>{{ $p->price }} </td>
-                                            <td>{{ $p->category_id }} </td>
+                                            <td>{{ $p->category_name }} </td>
                                             <td><i class="zmdi zmdi-eye"></i> {{ $p->view_count }}</td>
 
                                             <td>
@@ -88,7 +88,7 @@
                                                     </button> --}}
                                                     <a href="{{ route('product#edit', $p->id) }}" class="me-3">
                                                         <button class="item" data-toggle="tooltip" data-placement="top"
-                                                            title="Edit">
+                                                            title="View">
                                                             <i class="zmdi zmdi-eye"></i>
                                                         </button>
                                                     </a>

@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\User\UserController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
@@ -56,6 +57,14 @@ Route::middleware(['auth'])->group(function () {
             Route::get('details', [AdminController::class, 'details'])->name('admin#details');
             Route::get('edit', [AdminController::class, 'edit'])->name('admin#edit');
             Route::post('update/{id}', [AdminController::class, 'update'])->name('admin#update');
+
+            // list
+
+            Route::get('list',[AdminController::class,'list'])->name('admin#list');
+            Route::get('delete/{id}',[AdminController::class,'delete'])->name('admin#delete');
+            Route::get('changeRole/{id}',[AdminController::class,'changeRole'])->name('admin#changeRole');
+            Route::post('change/role/{id}',[AdminController::class,'change'])->name('admin#change');
+
         });
 
         // products
@@ -71,9 +80,9 @@ Route::middleware(['auth'])->group(function () {
     });
     //  user home
     Route::group(['prefix' => 'user', 'middleware' => 'user_auth'], function () {
-        Route::get('home', function () {
-            return view('user.home');
-        })->name('user#home');
+
+        Route::get('/homePage', [UserController::class,'home'])->name('user#home');
+
     });
 });
 

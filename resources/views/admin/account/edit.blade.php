@@ -13,20 +13,26 @@
                                 <h3 class="text-center title-2">Account Profile</h3>
                             </div>
                             <hr>
-                            <form action="{{ route('admin#update',Auth::user()->id) }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('admin#update', Auth::user()->id) }}" method="post"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-4 offset-1">
                                         @if (Auth::user()->image == null)
-                                            <img src="{{ asset('image/download.jfif') }}" class="img-tumbnai shadow-sm">
+                                            @if (Auth::user()->gender == 'male')
+                                                <img src="{{ asset('image/download.jfif') }}" alt="">
+                                            @else
+                                                <img src="{{ asset('image/female.jpg') }}" alt="">
+                                            @endif
                                         @else
-                                            <img src="{{ asset('storage/'.Auth::user()->image) }}" alt="John Doe">
+                                            <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="">
                                         @endif
                                         <div class="mt-3 ">
-                                            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                                            <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                                name="image">
                                             @error('image')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="mt-3 ">
                                             <button class="btn bg-dark text-white col-12" type="submit">
@@ -44,7 +50,7 @@
                                                 aria-required="true" aria-invalid="false" placeholder="Enter Name..."
                                                 value="{{ old('name', Auth::user()->name) }}">
 
-                                                @error('pizzaName')
+                                            @error('pizzaName')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -81,8 +87,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label mb-1">Address</label>
-                                            <textarea name="address"  class="form-control @error('address') is-invalid @enderror" placeholder="Enter Address..." id="" cols="30"
-                                                rows="10">{{ old('name', Auth::user()->address) }}</textarea>
+                                            <textarea name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Enter Address..."
+                                                id="" cols="30" rows="10">{{ old('name', Auth::user()->address) }}</textarea>
                                             @error('address')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -115,3 +121,5 @@
     </div>
 
 @endsection
+
+

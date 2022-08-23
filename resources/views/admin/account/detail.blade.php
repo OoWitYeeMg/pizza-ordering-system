@@ -29,9 +29,13 @@
                             <div class="row">
                                 <div class="col-3 offset-2">
                                     @if (Auth::user()->image == null)
-                                        <img src="{{ asset('image/download.jfif') }}" class="img-tumbnai shadow-sm">
+                                        @if (Auth::user()->gender == 'male')
+                                            <img src="{{ asset('image/download.jfif') }}" alt="">
+                                        @else
+                                            <img src="{{ asset('image/female.jpg') }}" alt="">
+                                        @endif
                                     @else
-                                        <img src="{{ asset('storage/'.Auth::user()->image) }}" alt="John Doe">
+                                        <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="">
                                     @endif
                                 </div>
                                 <div class="col-5 offset-1">

@@ -36,7 +36,12 @@ class AdminController extends Controller
         }
         return back()->with(['notMatch' => 'The Old Password not Match. Try Again!']);
     }
-
+    // change  admin role
+    public function changeRole($id)
+    {
+        $account = User::where('id', $id)->first();
+        return view('admin.account.changerole', compact('account'));
+    }
     //  direct admin details page
     public function details()
     {
@@ -71,6 +76,39 @@ class AdminController extends Controller
         User::where('id', $id)->update($data);
         return redirect()->route('admin#details')->with(['updateSuccess' => 'Admin Account Updated...']);
     }
+    // admin list
+    public function list()
+    {
+        $admin = User::when(request('key'), function ($query) {
+            $query->orWhere('name', 'like', '%' . request('key') . '%')
+                ->orWhere('name', 'like', '%' . request('key') . '%')
+                ->orWhere('email', 'like', '%' . request('key') . '%')
+                ->orWhere('phone', 'like', '%' . request('key') . '%')
+                ->orWhere('address', 'like', '%' . request('key') . '%')
+                ->orWhere('gender', 'like', '%' . request('key') . '%');
+        })->where('role', 'admin')->paginate(3);
+        $admin->append(request()->all());
+        return view('admin.account.adminlist', compact('admin'));
+    }
+    // admin delete account
+    public function delete($id)
+    {
+        User::where('id', $id)->delete();
+        return back()->with(['deleteSuccess' => 'Admin Account Deleted...']);
+    }
+    // change role admin
+    public function change($id, Request $request)
+    {
+        $data = $this->requestUserDate($request);
+        User::where('id', $id)->update($data);
+        return redirect()->route('admin#list');
+    }
+    private function requestUserDate($request)
+    {
+        return [
+            'role' => $request->role
+        ];
+    }
     // request user data
     private function getUserData($request)
     {
@@ -79,14 +117,19 @@ class AdminController extends Controller
             'email' => $request->email,
             'gender' => $request->gender,
             'phone' => $request->phone,
-            'address' => $request->address,
+            'address' => $request->address
         ];
     }
     // account validation check
     private function accountValidationCheck($request)
     {
         Validator::make($request->all(), [
-            'name' => 'required', 'email' => 'required', 'phone' => 'required', 'gender' => 'required', 'address' => 'required',            'image' => 'mimes:png,jpb,jpeg|file'
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'gender' => 'required',
+            'address' => 'required',
+            'image' => 'mimes:png,jpb,jpeg|file'
         ])->validate();
     }
     private function passwordValidationCheck($request)

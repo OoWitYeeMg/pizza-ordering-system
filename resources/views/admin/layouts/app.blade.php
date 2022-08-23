@@ -46,7 +46,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="{{ asset('admin/images/icon/logo.png') }}" alt="Cool Admin" />
+                    <img src="{{ asset('admin/images/icon/logo.png')}}" alt="CoolAdmin">
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -59,10 +59,7 @@
                         </li>
                         <li>
                             <a href="{{ route('product#list') }}">
-                                <i class="zmdi zmdi-pizza"></i>Products</a>
-                        </li> <li>
-                            <a href="{{ route('Catergory#list') }}">
-                                <i class="fas fa-chart-bar"></i>Category</a>
+                                <i class="zmdi zmdi-pizza"></i>Product</a>
                         </li>
                     </ul>
                 </nav>
@@ -77,14 +74,9 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                <h4>Admin Dashboard Panel</h4>
-                                {{-- <input class="au-input au-input--xl" type="text" name="search"
-                                    placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button> --}}
-                            </form>
+                            <div class="">
+<h3>                                Admin DashBoard Panel
+</h3>                            </div>
                             <div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -131,10 +123,14 @@
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image ">
                                             @if (Auth::user()->image == null)
-                                                <img src="{{ asset('image/download.jfif') }}" class="rounded">
+                                                @if (Auth::user()->gender == 'Male')
+                                                    <img src="{{ asset('image/download.jfif') }}" alt="">
+                                                @else
+                                                    <img src="{{ asset('image/female.jpg') }}" alt="">
+                                                @endif
                                             @else
-                                                <img src="{{ asset('storage/'.Auth::user()->image) }}"
-                                                    alt="John Doe">
+                                                <img src="{{ asset('storage/' . Auth::user()->image) }}"
+                                                    alt="">
                                             @endif
                                         </div>
                                         <div class="content">
@@ -145,10 +141,16 @@
                                                 <div class="image">
                                                     <a href="">
                                                         @if (Auth::user()->image == null)
-                                                            <img src="{{ asset('image/download.jfif') }}">
+                                                            @if (Auth::user()->gender == 'Male')
+                                                                <img src="{{ asset('image/download.jfif') }}"
+                                                                    alt="">
+                                                            @else
+                                                                <img src="{{ asset('image/female.jpg') }}"
+                                                                    alt="">
+                                                            @endif
                                                         @else
-                                                            <img src="{{ asset('storage/'.Auth::user()->image) }}"
-                                                                alt="John Doe">
+                                                            <img src="{{ asset('storage/' . Auth::user()->image) }}"
+                                                                alt="">
                                                         @endif
                                                     </a>
                                                 </div>
@@ -163,6 +165,12 @@
                                                 <div class="account-dropdown__item">
                                                     <a href="{{ route('admin#details') }}">
                                                         <i class="zmdi zmdi-account"></i>Account</a>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="{{ route('admin#list') }}">
+                                                        <i class="zmdi zmdi-accounts"></i>Admin List</a>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -191,13 +199,36 @@
             </header>
             <!-- HEADER DESKTOP-->
 
-            <!-- MAIN CONTENT-->
-            @yield('content')
-            <!-- END MAIN CONTENT-->
-            <!-- END PAGE CONTAINER-->
+            <!-- PAGE CONTAINER-->
+               @yield('content')
+
         </div>
 
-    </div>
+        <!-- Jquery JS-->
+        <script src="vendor/jquery-3.2.1.min.js"></script>
+        <!-- Bootstrap JS-->
+        <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+        <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+        <!-- Vendor JS       -->
+        <script src="vendor/slick/slick.min.js">
+        </script>
+        <script src="vendor/wow/wow.min.js"></script>
+        <script src="vendor/animsition/animsition.min.js"></script>
+        <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+        </script>
+        <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+        <script src="vendor/counter-up/jquery.counterup.min.js">
+        </script>
+        <script src="vendor/circle-progress/circle-progress.min.js"></script>
+        <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+        <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+        <script src="vendor/select2/select2.min.js">
+        </script>
+
+        <!-- Main JS-->
+        <script src="js/main.js"></script>
+
+    </body>
     {{-- Bootstrap Js --}}
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
