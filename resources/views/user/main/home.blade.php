@@ -1,21 +1,3 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>Home Page</h1>
-Role -{{ Auth::user()->role }}
-<form action="{{ route('logout') }}" method="POST">
-    @csrf
-    <input type="submit" value="Logout">
-</form>
-</body>
-</html> --}}
-
 @extends('user.main.layout.master')
 @section('title', 'Home Page')
 @section('content')
@@ -25,21 +7,23 @@ Role -{{ Auth::user()->role }}
             <!-- Shop Sidebar Start -->
             <div class="col-lg-3 col-md-4">
                 <!-- Price Start -->
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class=" pr-3">Filter by
                         price</span></h5>
                 <div class="bg-light p-4 mb-30 shadow-sm">
                     <form>
                         <div class=" d-flex align-items-center justify-content-between mb-3 bg-dark text-white px-3 py-1">
-                            {{-- <input type="checkbox" class="custom-control-input" checked id="price-all"> --}}
                             <label class="mt-2">Categories</label>
                             <span class="badge border font-weight-normal">{{ count($category) }}</span>
                         </div>
                         <hr>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <a href="{{ route('user#home') }}" class="text-dark">
+                                  <label class="">All</label> </a>
+                              </div>
                         @foreach ($category as $c)
-                            <div class=" d-flex align-items-center justify-content-between mb-3 shadow-sm pt-2">
-                                {{-- <input type="checkbox" class="custom-control-input" id="price-1"> --}}
-                                <label class="">{{ $c->name }}</label>
-                                {{-- <span class="badge border font-weight-normal">150</span> --}}
+                            <div class="d-flex align-items-center justify-content-between">
+                          <a href="{{ route('user#filter',$c->id) }}" class="text-dark">
+                                <label class="">{{ $c->name }}</label> </a>
                             </div>
                         @endforeach
 
@@ -49,84 +33,7 @@ Role -{{ Auth::user()->role }}
                 <div class="">
                     <button class="btn btn btn-warning w-100">Order</button>
                 </div>
-                <!-- Color Start -->
-                {{-- <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by color</span></h5>
-            <div class="bg-light p-4 mb-30">
-                <form>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="color-all">
-                        <label class="custom-control-label" for="price-all">All Color</label>
-                        <span class="badge border font-weight-normal">1000</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-1">
-                        <label class="custom-control-label" for="color-1">Black</label>
-                        <span class="badge border font-weight-normal">150</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-2">
-                        <label class="custom-control-label" for="color-2">White</label>
-                        <span class="badge border font-weight-normal">295</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-3">
-                        <label class="custom-control-label" for="color-3">Red</label>
-                        <span class="badge border font-weight-normal">246</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-4">
-                        <label class="custom-control-label" for="color-4">Blue</label>
-                        <span class="badge border font-weight-normal">145</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                        <input type="checkbox" class="custom-control-input" id="color-5">
-                        <label class="custom-control-label" for="color-5">Green</label>
-                        <span class="badge border font-weight-normal">168</span>
-                    </div>
-                </form>
-            </div> --}}
-                <!-- Color End -->
 
-                <!-- Size Start -->
-                {{-- <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by size</span></h5>
-            <div class="bg-light p-4 mb-30">
-                <form>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="size-all">
-                        <label class="custom-control-label" for="size-all">All Size</label>
-                        <span class="badge border font-weight-normal">1000</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="size-1">
-                        <label class="custom-control-label" for="size-1">XS</label>
-                        <span class="badge border font-weight-normal">150</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="size-2">
-                        <label class="custom-control-label" for="size-2">S</label>
-                        <span class="badge border font-weight-normal">295</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="size-3">
-                        <label class="custom-control-label" for="size-3">M</label>
-                        <span class="badge border font-weight-normal">246</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="size-4">
-                        <label class="custom-control-label" for="size-4">L</label>
-                        <span class="badge border font-weight-normal">145</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                        <input type="checkbox" class="custom-control-input" id="size-5">
-                        <label class="custom-control-label" for="size-5">XL</label>
-                        <span class="badge border font-weight-normal">168</span>
-                    </div>
-                </form>
-            </div>
-            <div class="">
-                <button class="btn btn btn-warning w-100">Order</button>
-            </div> --}}
-                <!-- Size End -->
             </div>
             <!-- Shop Sidebar End -->
 
@@ -142,62 +49,134 @@ Role -{{ Auth::user()->role }}
                             </div>
                             <div class="ml-2">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle"
-                                        data-toggle="dropdown">Sorting</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Latest</a>
-                                        <a class="dropdown-item" href="#">Popularity</a>
-                                        <a class="dropdown-item" href="#">Best Rating</a>
-                                    </div>
-                                </div>
-                                <div class="btn-group ml-2">
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle"
-                                        data-toggle="dropdown">Showing</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">10</a>
-                                        <a class="dropdown-item" href="#">20</a>
-                                        <a class="dropdown-item" href="#">30</a>
-                                    </div>
+                                    <select name="sorting" id="sorting" class="form-control">
+                                        <option value="">Choose Option...</option>
+                                        <option value="asc">Ascending</option>
+                                        <option value="desc">Descending</option>
+                                    </select>
                                 </div>
                             </div>
+
                         </div>
                     </div>
-                    @foreach ($pizza as $p)
-                        <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                            <div class="product-item bg-light mb-4">
-                                <div class="product-img position-relative overflow-hidden">
-                                    <img class="img-fluid w-100" src="{{ asset('storage/' . $p->image) }}" alt=""
-                                        style="height: 200px;">
-                                    <div class="product-action">
-                                        <a class="btn btn-outline-dark btn-square" href=""><i
-                                                class="fa fa-shopping-cart"></i></a>
-                                        <a class="btn btn-outline-dark btn-square" href=""><i
-                                                class="fa-solid fa-circle-info"></i></a>
-                                    </div>
-                                </div>
-                                <div class="text-center py-4">
-                                    <a class="h6 text-decoration-none text-truncate" href="">{{ $p->name }}</a>
-                                    <div class="d-flex align-items-center justify-content-center mt-2">
-                                        <h5>{{ $p->price }}</h5>
-                                        {{-- <h6 class="text-muted ml-2"><del>25000</del></h6> --}}
-                                    </div>
-
-                                    {{-- <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                </div> --}}
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
                 </div>
+               <div class="row" id="dataList">
+               @if (count($pizza)!= 0)
+               @foreach ($pizza as $p)
+               <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                   <div class="product-item bg-light mb-4" id="myForm">
+                       <div class="product-img position-relative overflow-hidden">
+                           <img class="img-fluid w-100" src="{{ asset('storage/' . $p->image) }}" alt=""
+                               style="height: 200px;">
+                           <div class="product-action">
+
+                               <a class="btn btn-outline-dark btn-square" href="{{ route('user#pizzaDetails',$p->id) }}"><i
+                                       class="fa-solid fa-circle-info"></i></a>
+                           </div>
+                       </div>
+                       <div class="text-center py-4">
+                           <a class="h6 text-decoration-none text-truncate" href="">{{ $p->name }}</a>
+                           <div class="d-flex align-items-center justify-content-center mt-2">
+                               <h5>{{ $p->price }}</h5>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           @endforeach
+           @else
+           <p class="text-center shadow-sm fs-3 col-6 offset-3 py-5 ">There is no pizza <i class="fa-solid fa-pizza-slice"></i></p>
+               @endif
+               </div>
             </div>
-            <!-- Shop Product End -->
         </div>
+        <!-- Shop Product End -->
+    </div>
     </div>
     <!-- Shop End -->
 
+@endsection
+@section('scriptSource')
+    <script>
+        $(document).ready(function() {
+            $('#sorting').change(function() {
+                $eventoption = $('#sorting').val();
+                if ($eventoption == 'asc') {
+                    $.ajax({
+                        type: 'get',
+                        url: 'http://127.0.0.1:8000/user/ajax/pizza/list',
+                        data: {
+                            'status': 'asc'
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            $list = '';
+                            for ($i = 0;$i<response.length;$i++) {
+                                // console.log(`${response[$i].name}`)
+                                $list+=`<div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                                    <div class="product-item bg-light mb-4" id="myForm">
+                                        <div class="product-img position-relative overflow-hidden">
+                                            <img class="img-fluid w-100" src="{{ asset('storage/${response[$i].image}') }}" alt=""
+                                                style="height: 200px;">
+                                            <div class="product-action">
+                                                <a class="btn btn-outline-dark btn-square" href=""><i
+                                                        class="fa fa-shopping-cart"></i></a>
+                                                <a class="btn btn-outline-dark btn-square" href=""><i
+                                                        class="fa-solid fa-circle-info"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="text-center py-4">
+                                            <a class="h6 text-decoration-none text-truncate" href="">${response[$i].name}</a>
+                                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                                <h5>${response[$i].price}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                            }
+                            $('#dataList').html($list);
+
+                        }
+                    })
+                }
+                 else if ($eventoption == 'desc') {
+                    $.ajax({
+                        type: 'get',
+                        url: 'http://127.0.0.1:8000/user/ajax/pizza/list',
+                        data: {
+                            'status': 'desc'
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            $list = '';
+                            for ($i = 0;$i<response.length;$i++) {
+                                // console.log(`${response[$i].name}`)
+                                $list+=`<div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                                    <div class="product-item bg-light mb-4" id="myForm">
+                                        <div class="product-img position-relative overflow-hidden">
+                                            <img class="img-fluid w-100" src="{{ asset('storage/${response[$i].image}') }}" alt=""
+                                                style="height: 200px;">
+                                            <div class="product-action">
+                                                <a class="btn btn-outline-dark btn-square" href=""><i
+                                                        class="fa fa-shopping-cart"></i></a>
+                                                <a class="btn btn-outline-dark btn-square" href=""><i
+                                                        class="fa-solid fa-circle-info"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="text-center py-4">
+                                            <a class="h6 text-decoration-none text-truncate" href="">${response[$i].name}</a>
+                                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                                <h5>${response[$i].price}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                            }
+                            $('#dataList').html($list);
+
+                        }
+                    })
+                }
+            })
+        });
+    </script>
 @endsection

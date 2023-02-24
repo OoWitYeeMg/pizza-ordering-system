@@ -29,7 +29,7 @@
                             <div class="row">
                                 <div class="col-3 offset-2">
                                     @if (Auth::user()->image == null)
-                                        @if (Auth::user()->gender == 'male')
+                                        @if (Auth::user()->gender == 'Male')
                                             <img src="{{ asset('image/download.jfif') }}" alt="">
                                         @else
                                             <img src="{{ asset('image/female.jpg') }}" alt="">

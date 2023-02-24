@@ -132,6 +132,7 @@ class AdminController extends Controller
             'image' => 'mimes:png,jpb,jpeg|file'
         ])->validate();
     }
+    // PASSWORD VALIDATION CHECK
     private function passwordValidationCheck($request)
     {
         Validator::make($request->all(), [

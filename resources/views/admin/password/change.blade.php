@@ -10,7 +10,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title">
-                                <h3 class="text-center title-2">Edit Your Category </h3>
+                                <h3 class="text-center title-2">Change Password </h3>
                             </div>
                             <hr>
                             <form action="{{ route('admin#changePassword') }}" method="post" novalidate="novalidate">
@@ -21,7 +21,7 @@
                                         class="form-control  @if (session('notMatch')) is-invalid @endif
                                         @error('oldPassword') is-invalid @enderror"
                                         aria-required="true" aria-invalid="false" placeholder="Enter Old Password...">
-                                   
+
                                     @if (session('notMatch'))
                                         <div class="invalid-feedback">{{ session('notMatch') }}</div>
                                     @endif

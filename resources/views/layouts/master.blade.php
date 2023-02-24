@@ -64,14 +64,14 @@
     <script src="{{ asset('admin/vendor/animsition/animsition.min.js')}}"></script>
     <script src="{{ asset('admin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js')}}">
     </script>
-    <script src="{{ asset('admin/vendor/counter-up/jquery.waypoints.min.js')}}"></script>
-    <script src="{{ asset('admin/vendor/counter-up/jquery.counterup.min.js')}}">
     </script>
     <script src="{{ asset('admin/vendor/circle-progress/circle-progress.min.js')}}"></script>
     <script src="{{ asset('admin/vendor/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
     <script src="{{ asset('admin/vendor/chartjs/Chart.bundle.min.js')}}"></script>
     <script src="{{ asset('admin/vendor/select2/select2.min.js')}}">
     </script>
+    {{-- jquery cdn --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Main JS-->
     <script src="{{ asset('admin/js/main.js')}}"></script>
